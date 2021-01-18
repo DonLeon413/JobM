@@ -1,0 +1,62 @@
+  
+ <div class="row" style="margin-top: 10px;">
+    <div class="col-6 form-group d-flex" 
+            style="margin-top:10px;margin-bottom:10px;">        
+        <label for="searchContext" class="p-2">Search:</label>
+        <input type="text"  name="searchContext" #movieSearchInput placeholder="Filter" 
+                  class="form-control p-2" >
+        <div *ngIf="IsFilter" class="p-2">             
+          <img src="assets/img/filter.png" width="30" height="30"> 
+        </div>    
+    </div>
+ </div>  
+ 
+  <div class="example-container mat-elevation-z8" style="width:100%;"> 
+    <table style="width: 100%;" mat-table #table matSort [dataSource]="dataSource" matSort class="mat-elevation-z2">
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Name}} </mat-cell>
+      </ng-container>
+
+      <!-- Second Column -->
+      <ng-container matColumnDef="second_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Second Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.SecondName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> EMail </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.EMail}} </mat-cell>
+      </ng-container>
+  
+      <!-- Email Column -->
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Phone}} </mat-cell>
+      </ng-container>
+
+      <!-- Details Column -->
+      <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+        <mat-cell *matCellDef="let row">  
+          <button (click)= "OnEdit(row)" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
+          <button (click)="OnDelete(row)"  class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="DisplayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: DisplayedColumns;"></mat-row>
+
+      </table>
+  </div>
+  <mat-paginator #paginator [length]="ActualPageLength"
+                     [pageSize]="5"
+                     [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+  <div class="row" style="margin-top: 10px;">
+    <button class="btn btn-primary" (click)="OnAddUser()"> Add user </button>
+ </div>  
+
